@@ -107,6 +107,13 @@ function LoginPage() {
     const code = new URL(window.location.href).searchParams.get("code"); //인가코드 추출
   };
     
+  const handleGoogle = () => {
+    window.location.href = 'http://127.0.0.1:8000/accounts/login/google/';
+  };
+
+  const handleNaver = () => {
+    window.location.href = 'http://127.0.0.1:8000/accounts/login/naver/';
+  };
   return (
     <>
     {isDesktop? 
@@ -116,8 +123,8 @@ function LoginPage() {
             <Line/>
                 <BtnContainer>
                     <KaKaO onClick={handleLogin}><StyledButton whileHover={["grow"]} variants={hoverVariants}><img src={kako}/>카카오 로그인</StyledButton></KaKaO>
-                    <Google><StyledButton whileHover={["grow"]} variants={hoverVariants}><img src={google}/>구글 로그인</StyledButton></Google>
-                    <Naver><StyledButton whileHover={["grow"]} variants={hoverVariants}><img src={naver}/>네이버 로그인</StyledButton></Naver>
+                    <Google onClick={handleGoogle}><StyledButton whileHover={["grow"]} variants={hoverVariants}><img src={google}/>구글 로그인</StyledButton></Google>
+                    <Naver onClick={handleNaver}><StyledButton whileHover={["grow"]} variants={hoverVariants}><img src={naver}/>네이버 로그인</StyledButton></Naver>
                 </BtnContainer>
             </LoginContainer>
     </Wrapper>

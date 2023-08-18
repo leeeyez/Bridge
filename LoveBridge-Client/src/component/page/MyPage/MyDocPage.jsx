@@ -127,8 +127,8 @@ const Validation = styled.div`
 
 function MyDocPage() {
     const isDesktop = useMediaQuery({ minWidth: 1170 });
-    const [familyname, setFamilyname] = useState(null);
-    const [idname, setIdname] = useState(null);
+    const [familyname, setFamilyname] = useState('');
+    const [idname, setIdname] = useState('');
     const [registname, setRegistname] = useState('');
     const [govname, setGovname] = useState('');
     const [family, setFamily] = useState('');
@@ -167,10 +167,10 @@ function MyDocPage() {
             setValid(true);
             console.log(family,id);
             axios.post('http://127.0.0.1:8000/mypage/mydocuments/', {
-                file1: family,
-                file2: id,
-                file3: regist,
-                file4: gov
+                file1: familyname,
+                file2: idname,
+                file3: registname,
+                file4: govname
             }).then(response => {
                 console.log(response);
             })

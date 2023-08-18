@@ -148,6 +148,7 @@ function MyApplyPage() {
                 key={program.id}
                 title={program.title}
                 district={program.district}
+                process={program.process}
                 onClick={(e) => cancelApply(e, program.id)}
               />
             ))}

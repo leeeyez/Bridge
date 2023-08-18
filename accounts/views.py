@@ -127,7 +127,7 @@ def get_naver_user_info(reqeust):
         age_range = user_info_json['response']['age'],
         gender = user_info_json['response']['gender']
     )
-    return redirect('home')
+    return redirect('http://localhost:3000/')
 
 
 # @api_view(['GET'])
@@ -195,4 +195,4 @@ def get_google_user_info(reqeust):
         user_id = user_info_json['id'],
         email = user_info_json['email'],
     )
-    return redirect('home')
+    return redirect('http://localhost:3000/')
