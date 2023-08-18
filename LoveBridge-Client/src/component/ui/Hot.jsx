@@ -1,17 +1,19 @@
 import React, { useCallback, useRef, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Dummy from "../../dummy.json";
+// import Dummy from "../../dummy.json";
 import PrevArrow from "../img/prev.svg";
 import NextArrow from "../img/next.svg";
-import hotIcon from '../img/hot-program.svg'
+import hotIcon from "../img/hot-program.svg";
 import axios from "axios";
 
 const Hot = () => {
   const prevArrow = useCallback(() => slickRef.current.slickPrev(), []);
   const nextArrow = useCallback(() => slickRef.current.slickNext(), []);
+
   const [applyCards, setApplyCards] = useState([]);
   const [editedCards, setEditedCards] = useState({});
 
@@ -19,28 +21,29 @@ const Hot = () => {
     fetchHotCards();
   }, []);
 
-  const fetchHotCards = () => { 
-    axios.get('http://127.0.0.1:8000/programs/popular/')
-    .then(response => {
-      setApplyCards(response.data);
-      const initialEditedCards = {};
-      response.data.forEach(item => {
-        const fullImageUrl = `http://127.0.0.1:8000${item.image}`;
-        initialEditedCards[item.id] = {
-          id: item.id,
-          title: item.title,
-          district: item.district,
-          image: fullImageUrl,
-        }
+  const fetchHotCards = () => {
+    axios
+      .get("http://127.0.0.1:8000/programs/popular/")
+      .then((response) => {
+        setApplyCards(response.data);
+        const initialEditedCards = {};
+        response.data.forEach((item) => {
+          const fullImageUrl = `http://127.0.0.1:8000${item.image}`;
+          initialEditedCards[item.id] = {
+            id: item.id,
+            title: item.title,
+            district: item.district,
+            image: fullImageUrl,
+          };
+        });
+        console.log(initialEditedCards);
+        setEditedCards(initialEditedCards);
+        console.log(editedCards);
+      })
+      .catch((error) => {
+        console.error("Error fetching cards: ", error);
       });
-      console.log(initialEditedCards);
-      setEditedCards(initialEditedCards);
-      console.log(editedCards);
-    })
-    .catch(error => {
-      console.error('Error fetching cards: ', error);
-    });
-};
+  };
 
   const settings = {
     dots: false,
@@ -64,28 +67,44 @@ const Hot = () => {
 
   const slickRef = useRef(null);
 
+  const navigate = useNavigate();
+
+  const confirmApply = (e, Id) => {
+    var programName =
+      e.target.parentElement.parentElement.children[1].textContent;
+    console.log(Id, programName);
+    if (window.confirm(`[${programName}] 정말 신청하시겠습니까?`)) {
+      axios.post(`http://127.0.0.1:8000/programs/list/${Id}/`);
+      alert(
+        `[${programName}] 신청이 완료되었습니다. \n 마이페이지의 내가 신청한 프로그램 페이지로 이동합니다. `
+      );
+      navigate("/my/apply");
+    } else {
+      alert("취소합니다.");
+    }
+  };
+
   return (
     <div>
       <Header>
-        <Topic><img src={hotIcon}/>인기 프로그램</Topic>
+        <Topic>
+          <img src={hotIcon} />
+          인기 프로그램
+        </Topic>
         <p>실시간으로 가장 인기있는 프로그램이에요.</p>
       </Header>
       <Wrap>
         <Slider ref={slickRef} {...settings}>
-        {applyCards.map(hot => (
+          {applyCards.map((hot) => (
             <Item key={hot.id}>
               <Img src={editedCards[hot.id]?.image}></Img>
               <Title>{editedCards[hot.id]?.title}</Title>
-              <Address>{editedCards[hot.id]?.district}</Address>
+              <Info>
+                <Address>{editedCards[hot.id]?.district}</Address>
+                <button onClick={(e) => confirmApply(e, hot.id)}>신청</button>
+              </Info>
             </Item>
           ))}
-          {/* {Dummy.hot.map((hot) => (
-            <Item key={hot.id}>
-              <Img src={hot.img}></Img>
-              <Title>{hot.title}</Title>
-              <Address>{hot.address}</Address>
-            </Item>
-          ))} */}
         </Slider>
       </Wrap>
     </div>
@@ -120,8 +139,14 @@ const Topic = styled.h3`
   margin-top: 60px;
   margin-left: 40px;
   margin-bottom: 10px;
-  > img {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  img {
     margin-right: 10px;
+    margin-top: 3px;
+    width: 30px;
+    height: 30px;
   }
 `;
 
@@ -165,7 +190,7 @@ const Img = styled.img`
   margin-right: 0px !important;
   flex-shrink: 0;
   border-radius: 30px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 `;
 
 const Title = styled.h3`
@@ -191,6 +216,28 @@ const Address = styled.p`
   width: 240px;
   margin-left: 7px;
   margin-right: 0px !important;
+`;
+
+const Info = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  button {
+    display: flex;
+    width: 68px;
+    height: 30px;
+    border-radius: 4px;
+    background: #6d6f82;
+    border: none;
+    color: #fff;
+    font-weight: 300;
+    font-size: 14px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    margin-right: 5px;
+  }
 `;
 
 const PrevBtn = styled.button`
