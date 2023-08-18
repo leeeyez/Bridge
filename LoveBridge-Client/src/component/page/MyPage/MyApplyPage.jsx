@@ -8,7 +8,7 @@ import step2 from "../../img/step2.svg";
 import step3 from "../../img/step3.svg";
 import arrow from "../../img/myapply_arrow.svg";
 import Dummy from "../../../dummy.json";
-import { useMediaQuery } from 'react-responsive';
+import { useMediaQuery } from "react-responsive";
 
 const Wrapper = styled.div`
   padding: 45px 136px 0px 123px;
@@ -19,8 +19,7 @@ const StepLine = styled.div`
   justify-content: space-between;
   padding: 40px 150px 40px 150px;
 `;
-const Step = styled.div`
-`;
+const Step = styled.div``;
 const Txt = styled.div`
   font-size: 18px;
   text-align: center;
@@ -44,14 +43,14 @@ function MyApplyPage() {
       .then((response) => {
         setApplied(response.data);
         console.log(response.data);
-        for ( var i = 0; i < response.data.length; i++) {
+        for (var i = 0; i < response.data.length; i++) {
           applied[i] = {
             id: response.data[i].id,
             title: response.data[i].title,
             district: response.data[i].district,
-            process: response.data[i].process
-          }
-        };
+            process: response.data[i].process,
+          };
+        }
         console.log(applied);
       })
       .catch((error) => {
@@ -79,82 +78,82 @@ function MyApplyPage() {
     }
   };
 
-
   return (
     <>
-    {isDesktop? 
-    <Wrapper>
-      <PagePath pathname1="마이페이지" pathname2="내가 신청한 프로그램" />
-      <Line style={{ marginTop: "50px" }} />
-      <StepLine>
-        <Step>
-          <img src={step1} />
-          <Txt>서류 전달</Txt>
-        </Step>
-        <Arrow>
-          <img src={arrow} />
-        </Arrow>
-        <Step>
-          <img src={step2} />
-          <Txt>심사 중</Txt>
-        </Step>
-        <Arrow>
-          <img src={arrow} />
-        </Arrow>
-        <Step>
-          <img src={step3} />
-          <Txt>심사 완료</Txt>
-        </Step>
-      </StepLine>
-      <Line style={{ marginBottom: "50px" }} />
-      <div>
-        {applied.map((program) => (
-          <Applied
-            key={program.id}
-            title={program.title}
-            district={program.district}
-            process={program.process}
-            onClick={(e) => cancelApply(e, program.id)}
-          />
-        ))}
-      </div>
-    </Wrapper>
-    :
-    <MobileWrapper>
-      <PagePath pathname1="마이페이지" pathname2="내가 신청한 프로그램" />
-      <MobileLine style={{ marginTop: "50px" }} />
-      <MobileStepLine>
-        <MobileStep>
-          <img src={step1} />
-          <MobileTxt>서류 전달</MobileTxt>
-        </MobileStep>
-        <MobileArrow>
-          <img src={arrow} />
-        </MobileArrow>
-        <MobileStep>
-          <img src={step2} />
-          <MobileTxt>심사 중</MobileTxt>
-        </MobileStep>
-        <MobileArrow>
-          <img src={arrow} />
-        </MobileArrow>
-        <MobileStep>
-          <img src={step3} />
-          <MobileTxt>심사 완료</MobileTxt>
-        </MobileStep>
-      </MobileStepLine>
-      <MobileLine style={{ marginBottom: "50px" }} />
-      <div>
-        {applied.map((program) => (
-          <Applied
-            key={program.id}
-            title={program.title}
-            district={program.district}
-            onClick={(e) => cancelApply(e, program.id)}
-          />
-        ))}
-      </div>
-    </MobileWrapper>}
+      {isDesktop ? (
+        <Wrapper>
+          <PagePath pathname1="마이페이지" pathname2="내가 신청한 프로그램" />
+          <Line style={{ marginTop: "50px" }} />
+          <StepLine>
+            <Step>
+              <img src={step1} />
+              <Txt>서류 전달</Txt>
+            </Step>
+            <Arrow>
+              <img src={arrow} />
+            </Arrow>
+            <Step>
+              <img src={step2} />
+              <Txt>심사 중</Txt>
+            </Step>
+            <Arrow>
+              <img src={arrow} />
+            </Arrow>
+            <Step>
+              <img src={step3} />
+              <Txt>심사 완료</Txt>
+            </Step>
+          </StepLine>
+          <Line style={{ marginBottom: "50px" }} />
+          <div>
+            {applied.map((program) => (
+              <Applied
+                key={program.id}
+                title={program.title}
+                district={program.district}
+                process={program.process}
+                onClick={(e) => cancelApply(e, program.id)}
+              />
+            ))}
+          </div>
+        </Wrapper>
+      ) : (
+        <MobileWrapper>
+          <PagePath pathname1="마이페이지" pathname2="내가 신청한 프로그램" />
+          <MobileLine style={{ marginTop: "50px" }} />
+          <MobileStepLine>
+            <MobileStep>
+              <img src={step1} />
+              <MobileTxt>서류 전달</MobileTxt>
+            </MobileStep>
+            <MobileArrow>
+              <img src={arrow} />
+            </MobileArrow>
+            <MobileStep>
+              <img src={step2} />
+              <MobileTxt>심사 중</MobileTxt>
+            </MobileStep>
+            <MobileArrow>
+              <img src={arrow} />
+            </MobileArrow>
+            <MobileStep>
+              <img src={step3} />
+              <MobileTxt>심사 완료</MobileTxt>
+            </MobileStep>
+          </MobileStepLine>
+          <MobileLine style={{ marginBottom: "50px" }} />
+          <div>
+            {applied.map((program) => (
+              <Applied
+                key={program.id}
+                title={program.title}
+                district={program.district}
+                onClick={(e) => cancelApply(e, program.id)}
+              />
+            ))}
+          </div>
+        </MobileWrapper>
+      )}
     </>
   );
 }
@@ -179,9 +178,9 @@ const MobileTxt = styled.div`
   color: #565656;
 `;
 const MobileArrow = styled.div`
-> img {
-  width: 3vw;
-}
+  > img {
+    width: 3vw;
+  }
 `;
 const MobileLine = styled.hr``;
 
