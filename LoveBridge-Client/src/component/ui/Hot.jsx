@@ -215,7 +215,7 @@ const Title = styled.h3`
 `;
 
 const Icon = styled.img`
-  width: 20px;
+  width: 15px;
   margin-right: 7px;
 `;
 
@@ -269,7 +269,7 @@ const Info1 = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-top: -7px;
+  margin-top: -9px;
   button {
     display: flex;
     width: 68px;
@@ -285,6 +285,9 @@ const Info1 = styled.div`
     margin-bottom: 15px;
     margin-right: 5px;
     bottom: 5px;
+    &:hover {
+      background: #6D6F82;
+    }
   }
 `;
 
