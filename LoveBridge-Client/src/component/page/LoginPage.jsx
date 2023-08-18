@@ -96,6 +96,16 @@ const hoverVariants = {
 function LoginPage() {
     const isDesktop = useMediaQuery({ minWidth: 1000 });
     const navigate = useNavigate();
+
+    const Rest_api_key = "12da077e9050dd98df72ac024e4ed35b"; //REST API KEY
+  const redirect_uri =
+    "http://127.0.0.1:8000/accounts/login/kakao/user/callback/"; //Redirect URI
+  // oauth 요청 URL
+  const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${Rest_api_key}&redirect_uri=${redirect_uri}&response_type=code`;
+  const handleLogin = () => {
+    window.location.href = kakaoURL;
+    const code = new URL(window.location.href).searchParams.get("code"); //인가코드 추출
+  };
     
   return (
     <>
@@ -105,9 +115,9 @@ function LoginPage() {
             <LoginContainer>
             <Line/>
                 <BtnContainer>
-                    <KaKaO onClick={() => navigate('http://127.0.0.1:8000/accounts/login/kakao/')}><StyledButton whileHover={["grow"]} variants={hoverVariants}><img src={kako}/>카카오 로그인</StyledButton></KaKaO>
-                    <Google onClick={() => navigate('http://127.0.0.1:8000/accounts/login/google/')}><StyledButton whileHover={["grow"]} variants={hoverVariants}><img src={google}/>구글 로그인</StyledButton></Google>
-                    <Naver onClick={() => navigate('http://127.0.0.1:8000/accounts/login/naver/')}><StyledButton whileHover={["grow"]} variants={hoverVariants}><img src={naver}/>네이버 로그인</StyledButton></Naver>
+                    <KaKaO onClick={handleLogin}><StyledButton whileHover={["grow"]} variants={hoverVariants}><img src={kako}/>카카오 로그인</StyledButton></KaKaO>
+                    <Google><StyledButton whileHover={["grow"]} variants={hoverVariants}><img src={google}/>구글 로그인</StyledButton></Google>
+                    <Naver><StyledButton whileHover={["grow"]} variants={hoverVariants}><img src={naver}/>네이버 로그인</StyledButton></Naver>
                 </BtnContainer>
             </LoginContainer>
     </Wrapper>

@@ -67,7 +67,7 @@ def get_kakao_user_info(request):
         age_range = user_info_json['kakao_account']['age_range'],
         gender = user_info_json['kakao_account']['gender']
     )
-    return redirect('home')
+    return redirect('http://localhost:3000/')
 
 # def kakao_logout(access_token):
 #     logout_url = "https://kapi.kakao.com/v1/user/logout"

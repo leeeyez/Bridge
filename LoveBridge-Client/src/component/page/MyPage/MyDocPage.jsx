@@ -127,8 +127,8 @@ const Validation = styled.div`
 
 function MyDocPage() {
     const isDesktop = useMediaQuery({ minWidth: 1170 });
-    const [familyname, setFamilyname] = useState('');
-    const [idname, setIdname] = useState('');
+    const [familyname, setFamilyname] = useState(null);
+    const [idname, setIdname] = useState(null);
     const [registname, setRegistname] = useState('');
     const [govname, setGovname] = useState('');
     const [family, setFamily] = useState('');
@@ -165,19 +165,18 @@ function MyDocPage() {
             window.scrollTo({ top: 0, behavior: "smooth" });  
         } else {
             setValid(true);
-            console.log(familyname);
+            console.log(family,id);
             axios.post('http://127.0.0.1:8000/mypage/mydocuments/', {
-                file1: familyname,
-                file2: idname,
-                file3: registname,
-                file4: govname
+                file1: family,
+                file2: id,
+                file3: regist,
+                file4: gov
             }).then(response => {
                 console.log(response);
             })
             .catch(error => {
                 console.error('Error handle search: ', error);
             });
-            console.log(familyname.name,idname.name)
             navigate('/my/doc/save');
         }
     } // 보내기
