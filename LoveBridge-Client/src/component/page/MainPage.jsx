@@ -8,6 +8,8 @@ function MainPage() {
     <div>
       <Banner />
       <Hot />
+      <br/>
+      <br/>
       <Closing />
     </div>
   );

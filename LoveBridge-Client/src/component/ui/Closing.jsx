@@ -77,7 +77,7 @@ const Hot = () => {
 
   const confirmApply = (e, Id) => {
     var programName =
-      e.target.parentElement.parentElement.children[1].textContent;
+      e.target.parentElement.parentElement.parentElement.children[1].textContent;
     console.log(Id, programName);
     if (window.confirm(`[${programName}] 정말 신청하시겠습니까?`)) {
       axios.post(`http://127.0.0.1:8000/programs/list/${Id}/`);
@@ -108,11 +108,11 @@ const Hot = () => {
               <Info2>
                 <Address><Icon src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx1QgYHzN6PBUabIa3QemaYjAU19wv_Xxd0AF-PTM&s" alt="지역 이미지" /> {editedCards[closing.id]?.district}</Address>
                 <Deadline><Icon src="https://cdn-icons-png.flaticon.com/512/2983/2983723.png" alt="마감일 이미지" /> {editedCards[closing.id]?.deadline_yy+'.'+editedCards[closing.id]?.deadline_mm+'.'+editedCards[closing.id]?.deadline_dd}</Deadline>
+                <Info1>
+                  <Like><Icon src="https://cdn-icons-png.flaticon.com/512/39/39559.png" alt="좋아요 이미지" /> {editedCards[closing.id]?.like}</Like>
+                  <button onClick={(e) => confirmApply(e, closing.id)}>신청</button>
+                </Info1>
               </Info2>
-              <Info1>
-                <Like><Icon src="https://cdn-icons-png.flaticon.com/512/39/39559.png" alt="좋아요 이미지" /> {editedCards[closing.id]?.like}</Like>
-                <button onClick={(e) => confirmApply(e, closing.id)}>신청</button>
-              </Info1>
             </Item>
           ))}
           {/* {Dummy.hot.map((hot) => (
@@ -133,6 +133,7 @@ export default Hot;
 const Header = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: -10px;
   p {
     color: #939393;
     font-family: Noto Sans;
@@ -141,6 +142,7 @@ const Header = styled.div`
     font-weight: 500;
     line-height: normal;
     margin-left: 40px;
+    margin-left: 80px;
     margin-top: 0px;
     margin-bottom: 20px;
   }

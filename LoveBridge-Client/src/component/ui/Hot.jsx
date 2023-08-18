@@ -28,7 +28,6 @@ const Hot = () => {
         setApplyCards(response.data);
         const initialEditedCards = {};
         response.data.forEach((item) => {
-          console.log(item.id);
           const fullImageUrl = `http://127.0.0.1:8000${item.image}`;
           initialEditedCards[item.id] = {
             id: item.id,
@@ -76,7 +75,7 @@ const Hot = () => {
 
   const confirmApply = (e, Id) => {
     var programName =
-      e.target.parentElement.parentElement.children[1].textContent;
+      e.target.parentElement.parentElement.parentElement.children[1].textContent;
     console.log(Id, programName);
     if (window.confirm(`[${programName}] 정말 신청하시겠습니까?`)) {
       axios.post(`http://127.0.0.1:8000/programs/list/${Id}/`);
@@ -125,6 +124,7 @@ export default Hot;
 const Header = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: -10px;
   p {
     color: #939393;
     font-family: Noto Sans;
@@ -132,7 +132,7 @@ const Header = styled.div`
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    margin-left: 40px;
+    margin-left: 80px;
     margin-top: 0px;
     margin-bottom: 20px;
   }
