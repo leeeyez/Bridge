@@ -139,11 +139,14 @@ const Topic = styled.h3`
   margin-top: 60px;
   margin-left: 40px;
   margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
   align-items: center;
   img {
     margin-right: 10px;
-    width: 16px;
-    height: 16px;
+    margin-top: 3px;
+    width: 30px;
+    height: 30px;
   }
 `;
 
