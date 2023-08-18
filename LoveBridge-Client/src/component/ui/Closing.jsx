@@ -150,11 +150,14 @@ const Topic = styled.h3`
   margin-top: 60px;
   margin-left: 40px;
   margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
   align-items: center;
   img {
     margin-right: 10px;
-    width: 16px;
-    height: 16px;
+    margin-top: 1px;
+    width: 30px;
+    height: 30px;
   }
 `;
 
@@ -198,7 +201,7 @@ const Img = styled.img`
   margin-right: 0px !important;
   flex-shrink: 0;
   border-radius: 30px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 `;
 
 const Title = styled.h3`
