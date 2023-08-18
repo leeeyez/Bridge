@@ -11,4 +11,4 @@ class ProgramSerializer(ModelSerializer):
 class RecommendSerializer(ModelSerializer):
     class Meta:
         model = Program
-        fields = ['id', 'image', 'title', 'district']
+        fields = ['id', 'image', 'title', 'district', 'deadline_yy', 'deadline_mm', 'deadline_dd', 'like']

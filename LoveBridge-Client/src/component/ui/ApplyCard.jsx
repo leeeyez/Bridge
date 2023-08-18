@@ -99,17 +99,13 @@ function ApplyCard(props) {
     const [islike, setIslike ] = useState(iflike); // 초기값을 iflike로
     console.log(image);
 
-    function handleLike() {
-        setIslike(!islike);
-    }
-
     return (
         <Card>
             <TopLine>
-                <TagContainer><Tag>#{tag1|| "태그1"}</Tag><Tag>#{tag2 || "태그2"}</Tag></TagContainer>
+                <TagContainer><Tag>#{tag1|| ""}</Tag><Tag>#{tag2 || "태그2"}</Tag></TagContainer>
                 <Like>
                     <LikeNum>{like || "0"}</LikeNum>
-                    {islike? <LikeBtn type="button" onClick={(e) => {handleLike(); onClickLike(e);}}><img src={likebtnactive}/></LikeBtn> : <LikeBtn type="button" onClick={(e) => {handleLike(); onClickLike(e);}} style={{marginRight:"2px", marginLeft:"3px"}}><img src={likebtn}/></LikeBtn>}
+                    {iflike? <LikeBtn type="button" onClick={(e) => {onClickLike(e);}}><img src={likebtnactive}/></LikeBtn> : <LikeBtn type="button" onClick={(e) => {onClickLike(e);}} style={{marginRight:"2px", marginLeft:"3px"}}><img src={likebtn}/></LikeBtn>}
                 </Like>
             </TopLine>
             <ImgContainer src={image}></ImgContainer>

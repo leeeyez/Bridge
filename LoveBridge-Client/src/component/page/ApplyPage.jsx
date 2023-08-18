@@ -2,7 +2,8 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useMediaQuery } from 'react-responsive';
+import { useMediaQuery } from 'react-responsive'; 
+import {AiOutlineFileSearch} from'react-icons/ai'; 
 
 import PagePath from "../ui/PagePath";
 import Select from "react-select";
@@ -236,7 +237,7 @@ function ApplyPage() {
       RegionSelectRef.current.setValue("선택 없음");
       Region2SelectRef.current.setValue("선택 없음");
       CategorySelectRef.current.setValue("선택 없음");
-      SortSelectRef.current.setValue("");
+      SortSelectRef.current.setValue(defaultSort);
     } //console.log('초기화');
   }; // 초기화 기능
 
@@ -274,15 +275,11 @@ function ApplyPage() {
         })
         alert(`[${programName}] 찜 목록에 저장되었습니다. \n 마이페이지의 내가 찜한 목록 페이지로 이동합니다.`);
         navigate('/my/like');
-        // setEditedCards(prevEditedCards => ({
-        //   ...prevEditedCards,
-        //   [Id]: {
-        //     ...prevEditedCards[Id],
-        //     ['like']: like+1,
-        //   },
-        // }));
       } else {
         alert("취소합니다.");
+        axios.post(`http://127.0.0.1:8000/programs/mylike/${Id}/`, {
+          iflike: 'false',
+        })
       }
     }
   } // 좋아요 handle
@@ -303,42 +300,42 @@ function ApplyPage() {
       setRegion2('');
       setCategory('');
       setSort('');
+      handleReset();
       setApplyCards(response.data);
     console.log(response.data);
     for ( var i = 0; i < response.data.length; i++) {
       applyCards[i] = { 
-            id: response.data[i].id,
-            title: response.data[i].title,
-            district: response.data[i].district,
-            image: 'http://127.0.0.1:8000/'+response.data[i].image,
-            agency: response.data[i].agency,
-            deadline_yy: response.data[i].deadline_yy,
-            deadline_mm: response.data[i].deadline_mm,
-            deadline_dd: response.data[i].deadline_dd,
-            phone: response.data[i].phone,
-            category1: response.data[i].category1,
-            category2: response.data[i].category2,
-            applicant: response.data[i].applicant,
-            like: response.data[i].like,
-            iflike: response.data[i].iflike,
-            // userid: card.userid, 
-          };
-      }
-      setTotal(response.data.length);
-    })
-    .catch(error => {
-      console.error('Error handle search: ', error);
-    });
-    console.log(applyCards);
-    setTotal(applyCards.length);
-    console.log('검색 성공');
+        id: response.data[i].id,
+        title: response.data[i].title,
+        district: response.data[i].district,
+        image: 'http://127.0.0.1:8000/'+response.data[i].image,
+        agency: response.data[i].agency,
+        deadline_yy: response.data[i].deadline_yy,
+        deadline_mm: response.data[i].deadline_mm,
+        deadline_dd: response.data[i].deadline_dd,
+        phone: response.data[i].phone,
+        category1: response.data[i].category1,
+        category2: response.data[i].category2,
+        applicant: response.data[i].applicant,
+        like: response.data[i].like,
+        iflike: response.data[i].iflike,
+        // userid: card.userid, 
+      };
+    }
+    setTotal(response.data.length);
+  })
+  .catch(error => {
+    console.error('Error handle search: ', error);
+  });
+  console.log(applyCards);
+  setTotal(applyCards.length);
+  console.log('검색 성공');
 };
 
 useEffect(() => {
   fetchApplyCards();
 }, []);
 
-var bridge = [];
 
 const fetchApplyCards = () => {
   axios.get('http://127.0.0.1:8000/programs/list/')
@@ -384,6 +381,9 @@ const fetchApplyCards = () => {
         <SelectBox>
           <PuppleTxt>항목을 선택해주세요.</PuppleTxt>
           <SelectContainer>
+            <Icon>
+              <AiOutlineFileSearch/>
+            </Icon>
             <SelectLine>
               <Txt>지역</Txt>
               <RegionSelect
@@ -445,7 +445,7 @@ const fetchApplyCards = () => {
               <SortSelect
                 className="react-select-container"
                 placeholder=""
-                value={defaultSort}
+                defaultValue={defaultSort}
                 onChange={(e) => {
                   if (e) {
                     setSort(e.value);
@@ -658,6 +658,9 @@ const fetchApplyCards = () => {
     </>
   );
 }
+
+const Icon = styled.div`
+`
 const MobileWrapper = styled.div`
   padding: 45px 50px 0px 50px;
 `

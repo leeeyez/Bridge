@@ -34,6 +34,10 @@ const Hot = () => {
             title: item.title,
             district: item.district,
             image: fullImageUrl,
+            deadline_yy: item.deadline_yy,
+            deadline_mm: item.deadline_mm,
+            deadline_dd: item.deadline_dd,
+            like: item.like,
           };
         });
         console.log(initialEditedCards);
@@ -71,7 +75,7 @@ const Hot = () => {
 
   const confirmApply = (e, Id) => {
     var programName =
-      e.target.parentElement.parentElement.children[1].textContent;
+      e.target.parentElement.parentElement.parentElement.children[1].textContent;
     console.log(Id, programName);
     if (window.confirm(`[${programName}] 정말 신청하시겠습니까?`)) {
       axios.post(`http://127.0.0.1:8000/programs/list/${Id}/`);
@@ -99,10 +103,14 @@ const Hot = () => {
             <Item key={hot.id}>
               <Img src={editedCards[hot.id]?.image}></Img>
               <Title>{editedCards[hot.id]?.title}</Title>
-              <Info>
-                <Address>{editedCards[hot.id]?.district}</Address>
-                <button onClick={(e) => confirmApply(e, hot.id)}>신청</button>
-              </Info>
+              <Info2>
+                <Address><Icon src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx1QgYHzN6PBUabIa3QemaYjAU19wv_Xxd0AF-PTM&s" alt="지역 이미지" /> {editedCards[hot.id]?.district}</Address>
+                <Deadline><Icon src="https://cdn-icons-png.flaticon.com/512/2983/2983723.png" alt="마감일 이미지" /> {editedCards[hot.id]?.deadline_yy+'.'+editedCards[hot.id]?.deadline_mm+'.'+editedCards[hot.id]?.deadline_dd}</Deadline>
+                <Info1>
+                  <Like><Icon src="https://cdn-icons-png.flaticon.com/512/39/39559.png" alt="좋아요 이미지" /> {editedCards[hot.id]?.like}</Like>
+                  <button onClick={(e) => confirmApply(e, hot.id)}>신청</button>
+                </Info1>
+              </Info2>
             </Item>
           ))}
         </Slider>
@@ -116,6 +124,7 @@ export default Hot;
 const Header = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: -10px;
   p {
     color: #939393;
     font-family: Noto Sans;
@@ -123,7 +132,7 @@ const Header = styled.div`
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    margin-left: 40px;
+    margin-left: 80px;
     margin-top: 0px;
     margin-bottom: 20px;
   }
@@ -174,12 +183,12 @@ const Item = styled.div`
   display: flex;
   flex-direction: column;
   width: 270px !important;
-  height: 300px;
+  height: 345px;
   padding: 16px 16px;
   margin-left: 0px;
   margin-right: 0px;
   flex-shrink: 0;
-  border-radius: 40px;
+  border-radius: 30px;
   border: 1px solid #666;
   background: #fff;
   box-shadow: 0px 30px 44px 0px rgba(198, 198, 198, 0.25);
@@ -189,7 +198,7 @@ const Img = styled.img`
   width: 235px;
   margin-right: 0px !important;
   flex-shrink: 0;
-  border-radius: 30px;
+  border-radius: 22px;
   margin-bottom: 15px;
 `;
 
@@ -203,7 +212,11 @@ const Title = styled.h3`
   width: 240px;
   margin-left: 7px;
   margin-right: 0px !important;
-  margin-bottom: 10px;
+`;
+
+const Icon = styled.img`
+  width: 20px;
+  margin-right: 7px;
 `;
 
 const Address = styled.p`
@@ -215,20 +228,54 @@ const Address = styled.p`
   line-height: normal;
   width: 240px;
   margin-left: 7px;
+  margin-bottom: 6px;
   margin-right: 0px !important;
+  display: flex;
+  flex-direction: row;
 `;
 
-const Info = styled.div`
+const Deadline = styled.div`
+  color: #5c5c5c;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  width: 240px;
+  margin-left: 7px;
+  margin-right: 0px !important;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const Like = styled.div`
+  color: #5c5c5c;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  width: 240px;
+  margin-left: 7px;
+  margin-top: 6px;
+  margin-right: 0px !important;
+  display: flex;
+  flex-direction: row;
+`;
+
+const Info1 = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-top: -7px;
   button {
     display: flex;
     width: 68px;
     height: 30px;
     border-radius: 4px;
-    background: #6d6f82;
+    background: #AD88EB;
     border: none;
     color: #fff;
     font-weight: 300;
@@ -237,7 +284,15 @@ const Info = styled.div`
     align-items: center;
     margin-bottom: 15px;
     margin-right: 5px;
+    bottom: 5px;
   }
+`;
+
+const Info2 = styled.div`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
 `;
 
 const PrevBtn = styled.button`
