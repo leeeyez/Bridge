@@ -1,0 +1,12 @@
+#dropdown-basic-button {
+    background-color: #ad88eb;
+    font-weight: 500;
+    border: 1px solid #ad88eb;
+}
+.item {
+    font-weight: 500;
+    font-size: 15px;
+}
+.item:hover {
+    background-color: #F4F2FB;
+}

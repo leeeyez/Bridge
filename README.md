@@ -1,2 +1,2 @@
-# real-full
-pip freeze한 코드
+# LoveBridge-Server
+멋사 11th 중앙해커톤 LoveBridge BackEnd

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>서류 등록</p>
+    <div class="container">
+        <form method="POST" action="{% url 'mypage:documents' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div>
+                <label for="id_file">첨부파일 : </label>
+                <input type="file" name="file" id="id_file">
+            </div>
+            <input type="submit" class="btn btn-primary col-12" value="제출">
+        </form>
+    </div>
+</body>
+</html>
