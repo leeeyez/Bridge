@@ -41,7 +41,9 @@ const Banner = () => {
               <br />
               이제는 기관 방문 없이도 등록된 서류를 통해 한 번의 클릭으로
             </Description>
-            <button onClick={() => navigate('/my/doc')}>내 서류 등록하기 {">"}</button>
+            <button onClick={() => navigate("/my/doc")}>
+              내 서류 등록하기 {">"}
+            </button>
           </Container>
         </Slide1>
         <Slide2>
@@ -88,11 +90,16 @@ const Wrapper = styled.div`
     width: 100%;
     max-width: 100%;
   }
+  .slick-slider {
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden !important;
+  }
 `;
 
 const Slide1 = styled.div`
   width: 100%;
-  height: 60vh;
+  height: 75vh;
   flex-shrink: 0;
   background: linear-gradient(
     90deg,
@@ -103,7 +110,7 @@ const Slide1 = styled.div`
   );
   display: flex !important;
   justify-content: space-between;
-  padding-right: 8vw; 
+  padding-right: 8vw;
   flex-direction: row;
   margin: 0 auto;
   div {
@@ -123,8 +130,8 @@ const Slide1 = styled.div`
     font-size: 22px;
     font-weight: 600;
     margin-left: auto;
-    margin-top: 10px;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.10);
+    margin-top: 50px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
   }
   img {
     padding: 80px -20px;
@@ -144,13 +151,13 @@ const Catchphrase = styled.h3`
   font-family: Noto Sans;
   text-shadow: 0px 3px 4px rgba(0, 0, 0, 0.12);
   text-align: right;
-  font-size: 4.2vw;
+  font-size: 3.2vw;
   font-style: normal;
   font-weight: 800;
   line-height: normal;
   float: right;
-  margin-top: 170px;
-  margin-bottom: 10px;
+  margin-top: 120px;
+  margin-bottom: 20px;
 `;
 
 const Description = styled.p`
@@ -158,7 +165,7 @@ const Description = styled.p`
   font-family: Noto Sans;
   text-shadow: 0px 3px 4px rgba(0, 0, 0, 0.12);
   text-align: right;
-  font-size: 1.5vw;
+  font-size: 1.2vw;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -169,7 +176,7 @@ const Description = styled.p`
 const Slide2 = styled.div`
   background: #ad88eb;
   width: 100%;
-  height: 60vh;
+  height: 75vh;
   overflow: hidden;
   z-index: -10;
   div {
@@ -177,18 +184,18 @@ const Slide2 = styled.div`
     flex-direction: column;
   }
   img {
-    width: 58vw;
+    width: 55vw;
     max-width: 100%;
     position: relative;
-    left: 55vw;
-    top: -570px;
+    left: 50vw;
+    top: -500px;
     overflow: hidden;
   }
 `;
 
 const Texts = styled.div`
   margin-left: 140px;
-  margin-top: 150px;
+  margin-top: 120px;
   margin-right: 0 !important;
   width: fit-content;
   max-width: 50%;
@@ -198,7 +205,7 @@ const Texts = styled.div`
     color: #fff;
     text-shadow: 0px 3px 4px rgba(0, 0, 0, 0.12);
     font-family: Noto Sans;
-    font-size: 3.5vw;
+    font-size: 3.2vw;
     font-style: normal;
     font-weight: 500;
     line-height: 56px;
@@ -211,7 +218,7 @@ const Texts = styled.div`
     color: #fff;
     text-shadow: 0px 3px 4px rgba(0, 0, 0, 0.07);
     font-family: Noto Sans;
-    font-size: 20px;
+    font-size: 1.2vw;
     font-weight: 500;
     line-height: 30px;
     letter-spacing: -0.75px;
@@ -232,7 +239,7 @@ const Slide3 = styled.div`
   background: #9669e2;
   position: relative;
   width: 100%;
-  height: 60vh;
+  height: 75vh;
   z-index: 0;
   width: 100%;
   overflow: hidden;
@@ -248,13 +255,15 @@ const Contents = styled.div`
   justify-content: center;
   img {
     width: 350px;
+    filter: drop-shadow(6px 6px 6px #5c3e77);
+    margin-top: -10px;
   }
 `;
 
 const BgImg = styled.img`
   position: absolute;
   top: -120px;
-  left: 60px;
+  left: 30px;
   z-index: -10;
   overflow: hidden;
 `;
@@ -265,16 +274,17 @@ const Headline = styled.div`
   align-items: center;
   color: #fff;
   font-family: Noto Sans;
-  font-size: 26px;
-  font-weight: 700;
+  font-size: 1.6vw;
+  font-weight: 500;
   margin-left: 80px;
-  margin-top: 60px;
+  margin-top: 50px;
   > p {
-    margin-top: 7px;
+    margin-top: 13px;
   }
 `;
 
 const Icon = styled.img`
   width: 30px;
   margin-right: 10px;
+  margin-top: 1px;
 `;
