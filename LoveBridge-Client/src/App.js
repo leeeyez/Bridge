@@ -2,7 +2,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import styled from 'styled-components';
 import Topbar from './component/ui/Topbar';
-import TopbarMini from "./component/ui/TopBarMini";
+import TopbarMini from "./component/ui/TopbarMini";
 import LoginPage from './component/page/LoginPage';
 import MainPage from './component/page/MainPage';
 import ApplyPage from './component/page/ApplyPage';
